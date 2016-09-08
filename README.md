@@ -20,9 +20,15 @@ Finally, looking up for the third one, the set of folks that is going to use the
 
 IMPLEMENTATION WORK:
 • The first part of the application included getting the application notified when a new message is received and then retrieve the relevant data from the text message. onReceive() method of BroadcastReceiver is used for detecting incoming messages in the phone. The onReceive() method detects the SMS_RECEIVED_ACTION which then reads the message body and receives the relevant message and inserts it into the database.
+
 • We used SQLLiteOpenHelper package to implement all the database transaction. A separate class named DatabaseHandler is created where all the database transaction methods are implemented including adding, retrieving, creating, etc.
+
 • The application includes Android CalendarView template to display the calendar.
+
 • Using setOnDateChangeListener method of calendar DayView activity is triggered on selection of any date. The date selected is passed on to the next activity.
+
 • On the Dayview page the layout includes different time of the day. Appointment information is retrieved from the database for the date selected and corresponding to each appointment a button is created on the DayView page showing the time of the appointment. The button is created dynamically as per the data found in the database for the particular date and the button is aligned on the time of the appointment. On clicking on the button, ReminderView activity is triggered.
+
 • On the ReminderView activity, the reminder details are displayed after retrieving them from the database. For instances where there are multiple reminder on the same date and time, the top entry is displayed first. On shaking the phone the consequent entries are displayed following a circular loop. This is achieved by the onSensorChanged() method from interface SensorEventListener. A formula for speed of phone shake is calculated using X,Y,Z axes of the phone and if the calculated speed is > threshold value set, the data is changed with next reminder data.
+
 • On clicking on the View Map button, it triggers the Google map on the basis of the location present in the reminder details. To implement this google LocationManager is used to connect to google maps.
